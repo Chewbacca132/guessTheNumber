@@ -22,8 +22,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-
-function random(min, max){
-  return min + Math.floor(Math.random() * (max - min));
-}

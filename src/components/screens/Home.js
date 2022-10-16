@@ -10,7 +10,7 @@ export default function Home(){
     return (
         <View>
             <Title/>
-            <Button 
+            <CustomButton 
                 title = 'Play'
                 onPress = {() => Nav.navigate('Play', {
                     min : 1,

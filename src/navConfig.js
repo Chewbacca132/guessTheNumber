@@ -5,5 +5,5 @@ import GameOver from './components/screens/GameOver';
 export default {
     Home,
     Play,
-    GameOver
+    GameOver,
 }

@@ -1,6 +1,8 @@
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useState } from 'react';
+
 import Nav from '../Nav';
+import GuessHistory from '../GuessHistory';
 
 import random from '../../random';
 
@@ -9,6 +11,7 @@ export default function Play({min, max, guessLimit}){
     const [input, setInput] = useState('');
     const [guess, setGuess] = useState(NaN);
     const [guessCount, setGuessCount] = useState(0);
+    const [guessHistory, setGuessHistory] = useState([]);
 
     const limitGuesses = typeof guessLimit === 'number';
 
@@ -16,13 +19,16 @@ export default function Play({min, max, guessLimit}){
         const guess_ = parseInt(input);
         if (guess_ === number){
             Nav.navigate('GameOver', {message : winMessage(number)});
+            return;
         }
         if (limitGuesses && guessCount >= guessLimit - 1)
         {
             Nav.navigate('GameOver', {message : guessLimitReachedMessage(number)});
+            return;
         }
         setGuess(guess_);
         setGuessCount(guessCount + 1);
+        guessHistory.unshift(guess_);
         setInput('');
     }
     
@@ -48,6 +54,10 @@ export default function Play({min, max, guessLimit}){
                     ) : ''
                 }
             </Text>
+            <GuessHistory
+                history = {guessHistory}
+                target = {number}
+            />
         </View>
     );
 }
